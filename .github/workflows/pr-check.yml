@@ -1,18 +1,19 @@
-name: PR Check
+name: Pull Request Check
 
 on:
   pull_request:
     branches:
+      - dev
       - main
 
 jobs:
-  test-and-lint:
+  lint-test:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Node.js
+    - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
@@ -20,8 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Run lint
-      run: npm run lint || echo "No linter configured"
+    - name: Run Lint
+      run: npm run lint || echo "No lint script defined"
 
-    - name: Run tests
-      run: npm test || echo "No tests configured"
+    - name: Run Tests
+      run: npm test || echo "No tests defined"
