@@ -1,4 +1,4 @@
-name: Release
+name: Release and Tag Deploy
 
 on:
   push:
@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
-        generate_release_notes: true
+        tag_name: ${{ github.ref_name }}
+
